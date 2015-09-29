@@ -11,6 +11,7 @@
 namespace Contao;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 /**
@@ -370,11 +371,13 @@ class Comments extends \Frontend
 			$strComment = str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), $strComment);
 
 			// Add the comment details
+			$objRouter = \System::getContainer()->get('router');
+			$strEditUrl = $objRouter->generate('contao_backend', ['do' => 'comments', 'act' => 'edit', 'id' => $objComment->id], UrlGeneratorInterface::ABSOLUTE_URL);
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
 									  \Idna::decode(\Environment::get('base')) . \Environment::get('request'),
-									  \Idna::decode(\Environment::get('base')) . 'contao/main.php?do=comments&act=edit&id=' . $objComment->id);
+									  $strEditUrl);
 
 			// Do not send notifications twice
 			if (is_array($varNotifies))
