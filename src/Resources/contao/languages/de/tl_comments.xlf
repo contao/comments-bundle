@@ -189,6 +189,10 @@
         <source>Publish/unpublish comment ID %s</source>
         <target>Kommentar ID %s veröffentlichen/unveröffentlichen</target>
       </trans-unit>
+      <trans-unit id="tl_comments.member.0">
+        <source>Member</source>
+        <target>Mitglied</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

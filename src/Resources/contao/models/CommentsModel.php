@@ -30,6 +30,7 @@ namespace Contao;
  * @property string  $ip
  * @property boolean $notified
  * @property boolean $notifiedReply
+ * @property integer $member
  *
  * @method static CommentsModel|null findById($id, array $opt=array())
  * @method static CommentsModel|null findByPk($id, array $opt=array())
@@ -50,6 +51,7 @@ namespace Contao;
  * @method static CommentsModel|null findOneByIp($val, array $opt=array())
  * @method static CommentsModel|null findOneByNotified($val, array $opt=array())
  * @method static CommentsModel|null findOneByNotifiedReply($val, array $opt=array())
+ * @method static CommentsModel|null findOneByMember($val, array $opt=array())
  *
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findByTstamp($val, array $opt=array())
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findBySource($val, array $opt=array())
@@ -66,6 +68,7 @@ namespace Contao;
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findByIp($val, array $opt=array())
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findByNotified($val, array $opt=array())
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findByNotifiedReply($val, array $opt=array())
+ * @method static Model\Collection|CommentsModel[]|CommentsModel|null findByMember($val, array $opt=array())
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findMultipleByIds($val, array $opt=array())
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findBy($col, $val, array $opt=array())
  * @method static Model\Collection|CommentsModel[]|CommentsModel|null findAll(array $opt=array())

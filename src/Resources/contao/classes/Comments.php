@@ -336,7 +336,8 @@ class Comments extends \Frontend
 				'comment'   => $this->convertLineFeeds($strComment),
 				'ip'        => $this->anonymizeIp(\Environment::get('ip')),
 				'date'      => $time,
-				'published' => ($objConfig->moderate ? '' : 1)
+				'published' => ($objConfig->moderate ? '' : 1),
+                'member'    => (FE_USER_LOGGED_IN ? FrontendUser::getInstance()->id : null)
 			);
 
 			// Store the comment

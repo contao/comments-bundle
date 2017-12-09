@@ -184,6 +184,13 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE'),
 			'sql'                     => "text NULL"
 		),
+        'member' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['member'],
+            'foreignKey'              => 'tl_member.CONCAT(firstname, " ", lastname)',
+            'sql'                     => "int(10) unsigned NULL default '0'",
+            'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+        ),
 		'addReply' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['addReply'],
