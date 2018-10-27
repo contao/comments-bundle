@@ -338,7 +338,7 @@ class Comments extends Frontend
 				'ip'        => \Environment::get('ip'),
 				'date'      => $time,
 				'published' => ($objConfig->moderate ? '' : 1),
-                'member'    => (FE_USER_LOGGED_IN ? FrontendUser::getInstance()->id : null)
+				'member'    => null !== ($member = FrontendUser::getInstance()) ? $member->id : null
 			);
 
 			// Store the comment
