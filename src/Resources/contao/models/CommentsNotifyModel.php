@@ -1,15 +1,14 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * (c) Leo Feyer
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace Contao;
-
 
 /**
  * Reads and writes comments subscriptions
@@ -69,7 +68,7 @@ namespace Contao;
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class CommentsNotifyModel extends \Model
+class CommentsNotifyModel extends Model
 {
 
 	/**
@@ -77,7 +76,6 @@ class CommentsNotifyModel extends \Model
 	 * @var string
 	 */
 	protected static $strTable = 'tl_comments_notify';
-
 
 	/**
 	 * Find a subscription by its tokens
@@ -93,7 +91,6 @@ class CommentsNotifyModel extends \Model
 
 		return static::findOneBy(array("($t.tokenConfirm=? OR $t.tokenRemove=?)"), array($strToken, $strToken), $arrOptions);
 	}
-
 
 	/**
 	 * Find a subscription by its source table, parent ID and e-mail address
@@ -112,7 +109,6 @@ class CommentsNotifyModel extends \Model
 		return static::findOneBy(array("$t.source=? AND $t.parent=? AND $t.email=?"), array($strSource, $intParent, $strEmail), $arrOptions);
 	}
 
-
 	/**
 	 * Find active subscriptions by their source table and parent ID
 	 *
@@ -126,6 +122,22 @@ class CommentsNotifyModel extends \Model
 	{
 		$t = static::$strTable;
 
-		return static::findBy(array("$t.source=? AND $t.parent=? AND tokenConfirm=''"), array($strSource, $intParent), $arrOptions);
+		return static::findBy(array("$t.source=? AND $t.parent=? AND $t.tokenConfirm=''"), array($strSource, $intParent), $arrOptions);
+	}
+
+	/**
+	 * Find subscriptions that have not been activated for more than 24 hours
+	 *
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return Model\Collection|CommentsNotifyModel[]|CommentsNotifyModel|null A collection of models or null if there are no expired subscriptions
+	 */
+	public static function findExpiredSubscriptions(array $arrOptions=array())
+	{
+		$t = static::$strTable;
+
+		return static::findBy(array("$t.addedOn<? AND $t.tokenConfirm!=''"), strtotime('-1 day'), $arrOptions);
 	}
 }
+
+class_alias(CommentsNotifyModel::class, 'CommentsNotifyModel');

@@ -1,34 +1,33 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * (c) Leo Feyer
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace Contao;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
 
-
 /**
  * Class Comments
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class Comments extends \Frontend
+class Comments extends Frontend
 {
 
 	/**
 	 * Add comments to a template
 	 *
-	 * @param FrontendTemplate|object $objTemplate
-	 * @param \stdClass               $objConfig
-	 * @param string                  $strSource
-	 * @param integer                 $intParent
-	 * @param mixed                   $varNotifies
+	 * @param FrontendTemplate $objTemplate
+	 * @param \stdClass        $objConfig
+	 * @param string           $strSource
+	 * @param integer          $intParent
+	 * @param mixed            $varNotifies
 	 */
 	public function addCommentsToTemplate(FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
@@ -61,7 +60,7 @@ class Comments extends \Frontend
 
 			// Get the current page
 			$id = 'page_c' . $key . $intParent; // see #4141
-			$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
+			$page = \Input::get($id) ?? 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$objConfig->perPage), 1))
@@ -100,7 +99,6 @@ class Comments extends \Frontend
 				$objConfig->template = 'com_default';
 			}
 
-			/** @var FrontendTemplate|object $objPartial */
 			$objPartial = new \FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
@@ -141,6 +139,7 @@ class Comments extends \Frontend
 		}
 
 		$objTemplate->comments = $arrComments;
+		$objTemplate->hlcText = $GLOBALS['TL_LANG']['MSC']['comments'];
 		$objTemplate->addComment = $GLOBALS['TL_LANG']['MSC']['addComment'];
 		$objTemplate->name = $GLOBALS['TL_LANG']['MSC']['com_name'];
 		$objTemplate->email = $GLOBALS['TL_LANG']['MSC']['com_email'];
@@ -151,15 +150,14 @@ class Comments extends \Frontend
 		$this->renderCommentForm($objTemplate, $objConfig, $strSource, $intParent, $varNotifies);
 	}
 
-
 	/**
 	 * Add a form to create new comments
 	 *
-	 * @param FrontendTemplate|object $objTemplate
-	 * @param \stdClass               $objConfig
-	 * @param string                  $strSource
-	 * @param integer                 $intParent
-	 * @param mixed                   $varNotifies
+	 * @param FrontendTemplate $objTemplate
+	 * @param \stdClass        $objConfig
+	 * @param string           $strSource
+	 * @param integer          $intParent
+	 * @param mixed            $varNotifies
 	 */
 	protected function renderCommentForm(FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
@@ -199,7 +197,7 @@ class Comments extends \Frontend
 				'label'     => $GLOBALS['TL_LANG']['MSC']['com_email'],
 				'value'     => $this->User->email,
 				'inputType' => 'text',
-				'eval'      => array('rgxp'=>'email', 'mandatory'=>true, 'maxlength'=>128, 'decodeEntities'=>true)
+				'eval'      => array('rgxp'=>'email', 'mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true)
 			),
 			'website' => array
 			(
@@ -260,6 +258,9 @@ class Comments extends \Frontend
 
 			/** @var Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name'], $arrField['value']));
+
+			// Append the parent ID to prevent duplicate IDs (see #1493)
+			$objWidget->id .= '_' . $intParent;
 
 			// Validate the widget
 			if (\Input::post('FORM_SUBMIT') == $strFormId)
@@ -334,7 +335,7 @@ class Comments extends \Frontend
 				'email'     => $arrWidgets['email']->value,
 				'website'   => $strWebsite,
 				'comment'   => $this->convertLineFeeds($strComment),
-				'ip'        => $this->anonymizeIp(\Environment::get('ip')),
+				'ip'        => \Environment::get('ip'),
 				'date'      => $time,
 				'published' => ($objConfig->moderate ? '' : 1),
                 'member'    => (FE_USER_LOGGED_IN ? FrontendUser::getInstance()->id : null)
@@ -351,7 +352,7 @@ class Comments extends \Frontend
 			}
 
 			// HOOK: add custom logic
-			if (isset($GLOBALS['TL_HOOKS']['addComment']) && is_array($GLOBALS['TL_HOOKS']['addComment']))
+			if (isset($GLOBALS['TL_HOOKS']['addComment']) && \is_array($GLOBALS['TL_HOOKS']['addComment']))
 			{
 				foreach ($GLOBALS['TL_HOOKS']['addComment'] as $callback)
 				{
@@ -385,7 +386,7 @@ class Comments extends \Frontend
 			}
 
 			// Do not send notifications twice
-			if (is_array($varNotifies))
+			if (\is_array($varNotifies))
 			{
 				$objEmail->sendTo(array_unique($varNotifies));
 			}
@@ -407,7 +408,6 @@ class Comments extends \Frontend
 			$this->reload();
 		}
 	}
-
 
 	/**
 	 * Replace bbcode and return the HTML string
@@ -457,8 +457,8 @@ class Comments extends \Frontend
 			'<span style="text-decoration:underline">$1</span>',
 			"\n\n" . '<div class="code"><p>'. $GLOBALS['TL_LANG']['MSC']['com_code'] .'</p><pre>$1</pre></div>' . "\n\n",
 			'<span style="color:$1">$2</span>',
-			"\n\n" . '<div class="quote">$1</div>' . "\n\n",
-			"\n\n" . '<div class="quote"><p>'. sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') .'</p>$2</div>' . "\n\n",
+			"\n\n" . '<blockquote>$1</blockquote>' . "\n\n",
+			"\n\n" . '<blockquote><p>'. sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') .'</p>$2</blockquote>' . "\n\n",
 			'<img src="$1" alt="" />',
 			'<a href="$1">$1</a>',
 			'<a href="$1">$2</a>',
@@ -477,7 +477,6 @@ class Comments extends \Frontend
 
 		return $strComment;
 	}
-
 
 	/**
 	 * Convert line feeds to <br /> tags
@@ -507,6 +506,23 @@ class Comments extends \Frontend
 		return preg_replace(array_keys($arrReplace), array_values($arrReplace), $strComment);
 	}
 
+	/**
+	 * Purge subscriptions that have not been activated within 24 hours
+	 */
+	public function purgeSubscriptions()
+	{
+		$objNotify = \CommentsNotifyModel::findExpiredSubscriptions();
+
+		if ($objNotify === null)
+		{
+			return;
+		}
+
+		foreach ($objNotify as $objModel)
+		{
+			$objModel->delete();
+		}
+	}
 
 	/**
 	 * Add the subscription and send the activation mail (double opt-in)
@@ -535,7 +551,7 @@ class Comments extends \Frontend
 			'email'        => $objComment->email,
 			'url'          => \Environment::get('request'),
 			'addedOn'      => $time,
-			'ip'           => \System::anonymizeIp(\Environment::get('ip')),
+			'ip'           => \Environment::get('ip'),
 			'tokenConfirm' => md5(uniqid(mt_rand(), true)),
 			'tokenRemove'  => md5(uniqid(mt_rand(), true))
 		);
@@ -556,11 +572,10 @@ class Comments extends \Frontend
 		$objEmail->sendTo($objComment->email);
 	}
 
-
 	/**
 	 * Change the subscription status
 	 *
-	 * @param FrontendTemplate|object $objTemplate
+	 * @param FrontendTemplate $objTemplate
 	 */
 	public static function changeSubscriptionStatus(FrontendTemplate $objTemplate)
 	{
@@ -585,7 +600,6 @@ class Comments extends \Frontend
 			$objTemplate->confirm = $GLOBALS['TL_LANG']['MSC']['com_optInCancel'];
 		}
 	}
-
 
 	/**
 	 * Notify the subscribers of new comments
@@ -628,3 +642,5 @@ class Comments extends \Frontend
 		$objComment->save();
 	}
 }
+
+class_alias(Comments::class, 'Comments');

@@ -1,15 +1,14 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * (c) Leo Feyer
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace Contao;
-
 
 /**
  * Reads and writes comments
@@ -92,7 +91,7 @@ namespace Contao;
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class CommentsModel extends \Model
+class CommentsModel extends Model
 {
 
 	/**
@@ -100,7 +99,6 @@ class CommentsModel extends \Model
 	 * @var string
 	 */
 	protected static $strTable = 'tl_comments';
-
 
 	/**
 	 * Find published comments by their source table and parent ID
@@ -119,7 +117,7 @@ class CommentsModel extends \Model
 		$t = static::$strTable;
 		$arrColumns = array("$t.source=? AND $t.parent=?");
 
-		if (isset($arrOptions['ignoreFePreview']) || !BE_USER_LOGGED_IN)
+		if (!static::isPreviewMode($arrOptions))
 		{
 			$arrColumns[] = "$t.published='1'";
 		}
@@ -135,21 +133,21 @@ class CommentsModel extends \Model
 		return static::findBy($arrColumns, array($strSource, (int) $intParent), $arrOptions);
 	}
 
-
 	/**
 	 * Count published comments by their source table and parent ID
 	 *
-	 * @param string  $strSource The source element
-	 * @param integer $intParent The parent ID
+	 * @param string  $strSource  The source element
+	 * @param integer $intParent  The parent ID
+	 * @param array   $arrOptions An optional options array
 	 *
 	 * @return integer The number of comments
 	 */
-	public static function countPublishedBySourceAndParent($strSource, $intParent)
+	public static function countPublishedBySourceAndParent($strSource, $intParent, array $arrOptions=array())
 	{
 		$t = static::$strTable;
 		$arrColumns = array("$t.source=? AND $t.parent=?");
 
-		if (isset($arrOptions['ignoreFePreview']) || !BE_USER_LOGGED_IN)
+		if (!static::isPreviewMode($arrOptions))
 		{
 			$arrColumns[] = "$t.published='1'";
 		}
@@ -157,3 +155,5 @@ class CommentsModel extends \Model
 		return static::countBy($arrColumns, array($strSource, (int) $intParent));
 	}
 }
+
+class_alias(CommentsModel::class, 'CommentsModel');

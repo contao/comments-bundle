@@ -1,17 +1,13 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * (c) Leo Feyer
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
-
-/**
- * Table tl_comments
- */
 $GLOBALS['TL_DCA']['tl_comments'] = array
 (
 
@@ -209,7 +205,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 		),
 		'reply' => array
 		(
@@ -251,7 +247,6 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 	)
 );
 
-
 /**
  * Provide miscellaneous methods that are used by the data configuration array.
  *
@@ -268,7 +263,6 @@ class tl_comments extends Backend
 		parent::__construct();
 		$this->import('BackendUser', 'User');
 	}
-
 
 	/**
 	 * Check permissions to edit table tl_comments
@@ -293,7 +287,7 @@ class tl_comments extends Backend
 
 				if ($objComment->numRows < 1)
 				{
-					throw new Contao\CoreBundle\Exception\AccessDeniedException('Comment ID ' . Input::get('id') . ' does not exist.');
+					throw new Contao\CoreBundle\Exception\AccessDeniedException('Invalid comment ID ' . Input::get('id') . '.');
 				}
 
 				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
@@ -310,12 +304,12 @@ class tl_comments extends Backend
 
 				$session = $objSession->all();
 
-				if (!is_array($session['CURRENT']['IDS']) || empty($session['CURRENT']['IDS']))
+				if (empty($session['CURRENT']['IDS']) || !\is_array($session['CURRENT']['IDS']))
 				{
 					break;
 				}
 
-				$objComment = $this->Database->execute("SELECT id, parent, source FROM tl_comments WHERE id IN(" . implode(',', array_map('intval', $session['CURRENT']['IDS'])) . ")");
+				$objComment = $this->Database->execute("SELECT id, parent, source FROM tl_comments WHERE id IN(" . implode(',', array_map('\intval', $session['CURRENT']['IDS'])) . ")");
 
 				while ($objComment->next())
 				{
@@ -330,14 +324,13 @@ class tl_comments extends Backend
 				break;
 
 			default:
-				if (strlen(Input::get('act')))
+				if (\strlen(Input::get('act')))
 				{
 					throw new Contao\CoreBundle\Exception\AccessDeniedException('Invalid command "' . Input::get('act') . '.');
 				}
 				break;
 		}
 	}
-
 
 	/**
 	 * Notify subscribers of a reply
@@ -372,7 +365,6 @@ class tl_comments extends Backend
 
 		$this->Database->prepare("UPDATE tl_comments SET notifiedReply='1' WHERE id=?")->execute($dc->id);
 	}
-
 
 	/**
 	 * Check whether the user is allowed to edit a comment
@@ -457,7 +449,7 @@ class tl_comments extends Backend
 
 			default:
 				// HOOK: support custom modules
-				if (isset($GLOBALS['TL_HOOKS']['isAllowedToEditComment']) && is_array($GLOBALS['TL_HOOKS']['isAllowedToEditComment']))
+				if (isset($GLOBALS['TL_HOOKS']['isAllowedToEditComment']) && \is_array($GLOBALS['TL_HOOKS']['isAllowedToEditComment']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['isAllowedToEditComment'] as $callback)
 					{
@@ -476,7 +468,6 @@ class tl_comments extends Backend
 		return Cache::get($strKey);
 	}
 
-
 	/**
 	 * Send out the new comment notifications
 	 *
@@ -493,7 +484,6 @@ class tl_comments extends Backend
 
 		return $varValue;
 	}
-
 
 	/**
 	 * List a particular record
@@ -560,7 +550,7 @@ class tl_comments extends Backend
 
 			default:
 				// HOOK: support custom modules
-				if (isset($GLOBALS['TL_HOOKS']['listComments']) && is_array($GLOBALS['TL_HOOKS']['listComments']))
+				if (isset($GLOBALS['TL_HOOKS']['listComments']) && \is_array($GLOBALS['TL_HOOKS']['listComments']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['listComments'] as $callback)
 					{
@@ -580,13 +570,12 @@ class tl_comments extends Backend
 
 		return '
 <div class="comment_wrap">
-<div class="cte_type ' . $key . '"><a href="mailto:' . Idna::decodeEmail($arrRow['email']) . '" title="' . StringUtil::specialchars(Idna::decodeEmail($arrRow['email'])) . '">' . $arrRow['name'] . '</a>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . StringUtil::specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' – ' . Date::parse(Config::get('datimFormat'), $arrRow['date']) . ' – IP ' . StringUtil::specialchars($arrRow['ip']) . '<br>' . $title . '</div>
+<div class="cte_type ' . $key . '"><a href="mailto:' . Idna::decodeEmail($arrRow['email']) . '" title="' . StringUtil::specialchars(Idna::decodeEmail($arrRow['email'])) . '">' . $arrRow['name'] . '</a>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . StringUtil::specialchars($arrRow['website']) . '" target="_blank" rel="noreferrer noopener">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' – ' . Date::parse(Config::get('datimFormat'), $arrRow['date']) . ' – IP ' . StringUtil::specialchars($arrRow['ip']) . '<br>' . $title . '</div>
 <div class="limit_height mark_links' . (!Config::get('doNotCollapse') ? ' h38' : '') . '">
 ' . $arrRow['comment'] . '
 </div>
 </div>' . "\n    ";
 	}
-
 
 	/**
 	 * Return the edit comment button
@@ -605,7 +594,6 @@ class tl_comments extends Backend
 		return $this->isAllowedToEditComment($row['parent'], $row['source']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg/i', '_.svg', $icon)).' ';
 	}
 
-
 	/**
 	 * Return the delete comment button
 	 *
@@ -623,7 +611,6 @@ class tl_comments extends Backend
 		return $this->isAllowedToEditComment($row['parent'], $row['source']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.svg/i', '_.svg', $icon)).' ';
 	}
 
-
 	/**
 	 * Return the "toggle visibility" button
 	 *
@@ -638,7 +625,7 @@ class tl_comments extends Backend
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (strlen(Input::get('tid')))
+		if (\strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
@@ -665,7 +652,6 @@ class tl_comments extends Backend
 		return '<a href="'.$this->addToUrl($href).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"').'</a> ';
 	}
 
-
 	/**
 	 * Disable/enable a user group
 	 *
@@ -687,16 +673,16 @@ class tl_comments extends Backend
 		}
 
 		// Trigger the onload_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_comments']['config']['onload_callback']))
+		if (\is_array($GLOBALS['TL_DCA']['tl_comments']['config']['onload_callback']))
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_comments']['config']['onload_callback'] as $callback)
 			{
-				if (is_array($callback))
+				if (\is_array($callback))
 				{
 					$this->import($callback[0]);
 					$this->{$callback[0]}->{$callback[1]}($dc);
 				}
-				elseif (is_callable($callback))
+				elseif (\is_callable($callback))
 				{
 					$callback($dc);
 				}
@@ -726,16 +712,16 @@ class tl_comments extends Backend
 		$objVersions->initialize();
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback']))
+		if (\is_array($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback']))
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback'] as $callback)
 			{
-				if (is_array($callback))
+				if (\is_array($callback))
 				{
 					$this->import($callback[0]);
 					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, $dc);
 				}
-				elseif (is_callable($callback))
+				elseif (\is_callable($callback))
 				{
 					$blnVisible = $callback($blnVisible, $dc);
 				}
@@ -755,16 +741,16 @@ class tl_comments extends Backend
 		}
 
 		// Trigger the onsubmit_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_comments']['config']['onsubmit_callback']))
+		if (\is_array($GLOBALS['TL_DCA']['tl_comments']['config']['onsubmit_callback']))
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_comments']['config']['onsubmit_callback'] as $callback)
 			{
-				if (is_array($callback))
+				if (\is_array($callback))
 				{
 					$this->import($callback[0]);
 					$this->{$callback[0]}->{$callback[1]}($dc);
 				}
-				elseif (is_callable($callback))
+				elseif (\is_callable($callback))
 				{
 					$callback($dc);
 				}

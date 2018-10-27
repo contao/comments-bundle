@@ -1,190 +1,193 @@
 <?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/en/tl_comments.php" source-language="en" target-language="hu">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_comments.php" source-language="en" target-language="br">
     <body>
       <trans-unit id="tl_comments.source.0">
         <source>Origin</source>
-        <target>Indulás helye</target>
+        <target>Orin</target>
       </trans-unit>
       <trans-unit id="tl_comments.source.1">
         <source>The associated table.</source>
-        <target>A kapcsolódó tábla.</target>
+        <target>An daol kevredet.</target>
       </trans-unit>
       <trans-unit id="tl_comments.parent.0">
         <source>Parent ID</source>
-        <target>A szülő ID</target>
+        <target>ID kar</target>
       </trans-unit>
       <trans-unit id="tl_comments.parent.1">
         <source>The associated record.</source>
-        <target>A kapcsolódó rekord.</target>
+        <target>An enrolladenn kevredet.</target>
       </trans-unit>
       <trans-unit id="tl_comments.date.0">
         <source>Date</source>
-        <target>Dátum</target>
+        <target>Deiziad</target>
       </trans-unit>
       <trans-unit id="tl_comments.date.1">
         <source>Please enter the comment date.</source>
-        <target>Adja meg a hozzászólás dátumát.</target>
+        <target>Ebarzhit mar plij deiziad an evezhiadenn.</target>
       </trans-unit>
       <trans-unit id="tl_comments.name.0">
         <source>Author</source>
-        <target>Szerző</target>
+        <target>Aozer</target>
       </trans-unit>
       <trans-unit id="tl_comments.name.1">
         <source>Please enter the author's name.</source>
-        <target>Adja meg a szerző nevét.</target>
+        <target>Ebarzhit anv an aozer mar plij.</target>
       </trans-unit>
       <trans-unit id="tl_comments.email.0">
         <source>E-mail address</source>
-        <target>E-mail címek</target>
+        <target>Chomlec'h postel</target>
       </trans-unit>
       <trans-unit id="tl_comments.email.1">
         <source>The e-mail address will not be published.</source>
-        <target>Az e-mail cím nem publikus.</target>
+        <target>Ar chomlec'h postel na vo ket embannet.</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.0">
         <source>Website</source>
-        <target>Weboldal</target>
+        <target>Lec'hienn internet</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.1">
         <source>Here you can enter a website address.</source>
-        <target>Itt megadhat egy honlap címet.</target>
+        <target>Gellout a rit ebarzhiñ chomlec'h ur lec'hienn internet amañ.</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.0">
         <source>Comment</source>
-        <target>Megjegyzés (Comment)</target>
+        <target>Evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.1">
         <source>Please enter the comment.</source>
-        <target>Ide írja be a hozzászólást.</target>
+        <target>Ebarzhit mar plij an deiziad.</target>
       </trans-unit>
       <trans-unit id="tl_comments.addReply.0">
         <source>Add a reply</source>
-        <target>Válasz hozzáadása</target>
+        <target>Ouzhpennañ ur respont</target>
       </trans-unit>
       <trans-unit id="tl_comments.addReply.1">
         <source>Here you can reply to the comment.</source>
-        <target>Itt tud válaszolni a hozzászólásra.</target>
+        <target>Gellout a rit respont d'an evezhiadenn amañ.</target>
       </trans-unit>
       <trans-unit id="tl_comments.author.0">
         <source>Author</source>
-        <target>Szerző</target>
+        <target>Aozer</target>
       </trans-unit>
       <trans-unit id="tl_comments.author.1">
         <source>Here you can change the author of the reply.</source>
-        <target>Itt tudja megváltoztatni a válasz szerzőjét.</target>
+        <target>Gellout a reer cheñch amañ aozer ar respont.</target>
       </trans-unit>
       <trans-unit id="tl_comments.reply.0">
         <source>Reply</source>
-        <target>Válasz</target>
+        <target>Respont</target>
       </trans-unit>
       <trans-unit id="tl_comments.reply.1">
         <source>Here you can enter the reply.</source>
-        <target>Itt írhat választ.</target>
+        <target>Gellout a rit ebarzhiñ ar respont amañ.</target>
       </trans-unit>
       <trans-unit id="tl_comments.published.0">
         <source>Publish comment</source>
-        <target>Hozzászólás megjelenítése</target>
+        <target>Embann an evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>Ezzel a hozzászólás nyilvánosan látható lesz a honlapon.</target>
+        <target>Grit ma vo gwelus en un doare foran an evezhiadenn war al lec'hienn.</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.0">
         <source>IP address</source>
-        <target>IP cím</target>
+        <target>Chomlec'h IP</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.1">
         <source>The IP address of the author.</source>
-        <target>A szerző IP címe.</target>
+        <target>Chomlec'h IP an aozer.</target>
       </trans-unit>
       <trans-unit id="tl_comments.notified.0">
         <source>Notified (comment)</source>
+        <target>Kemennet (evezhiadenn)</target>
       </trans-unit>
       <trans-unit id="tl_comments.notified.1">
         <source>The notification of this comment has been sent.</source>
-        <target>Az értesítés a hozzászólásról elküldve.</target>
+        <target>Kaset eo bet kemenn an evezhiadenn-mañ.</target>
       </trans-unit>
       <trans-unit id="tl_comments.notifiedReply.0">
         <source>Notified (reply)</source>
+        <target>Kemennet (respont)</target>
       </trans-unit>
       <trans-unit id="tl_comments.notifiedReply.1">
         <source>The notification of the reply to this comment has been sent.</source>
+        <target>Kaset eo bet kemenn ar respont evit an evezhiadenn-mañ.</target>
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>
-        <target>Szerző</target>
+        <target>Aozer</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment_legend">
         <source>Comment</source>
-        <target>Megjegyzés (Comment)</target>
+        <target>Evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.reply_legend">
         <source>Reply</source>
-        <target>Válasz</target>
+        <target>Respont</target>
       </trans-unit>
       <trans-unit id="tl_comments.publish_legend">
         <source>Publish settings</source>
-        <target>Megjelenítési beállítások</target>
+        <target>Embann an arventennoù</target>
       </trans-unit>
       <trans-unit id="tl_comments.approved">
         <source>Approved</source>
-        <target>Jóváhagyott</target>
+        <target>Aprouet</target>
       </trans-unit>
       <trans-unit id="tl_comments.pending">
         <source>Awaiting moderation</source>
-        <target>Várakozás moderálásra</target>
+        <target>O c'hortoz war-lerc'h habaskadur</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_content">
         <source>Article</source>
-        <target>Cikk</target>
+        <target>Pennad</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_page">
         <source>Page</source>
-        <target>Oldal</target>
+        <target>Pajenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_news">
         <source>News item</source>
-        <target>Hír</target>
+        <target>Elfennoù nevez</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_faq">
         <source>FAQ</source>
-        <target>GyIK</target>
+        <target>FAG</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_calendar_events">
         <source>Event</source>
-        <target>Esemény</target>
+        <target>Darvoud</target>
       </trans-unit>
       <trans-unit id="tl_comments.show.0">
         <source>Comment details</source>
-        <target>Hozzászólás részletei</target>
+        <target>Munudoù an evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.show.1">
         <source>Show the details of comment ID %s</source>
-        <target>Az ID %s hozzászólás részleteinek megtekintése</target>
+        <target>Diskouez munudoù an evezhiadenn %s</target>
       </trans-unit>
       <trans-unit id="tl_comments.edit.0">
         <source>Edit comment</source>
-        <target>Hozzászólás szerkesztése</target>
+        <target>Kemm an evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.edit.1">
         <source>Edit comment ID %s</source>
-        <target>Az ID %s hozzászólás szerkesztése</target>
+        <target>Kemm an evezhiadenn %s</target>
       </trans-unit>
       <trans-unit id="tl_comments.delete.0">
         <source>Delete comment</source>
-        <target>Hozzászólás törlése</target>
+        <target>Dilemel an evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.delete.1">
         <source>Delete comment ID %s</source>
-        <target>Az ID %s hozzászólás törlése</target>
+        <target>Dilemel an evezhiadenn %s</target>
       </trans-unit>
       <trans-unit id="tl_comments.toggle.0">
         <source>Publish/unpublish comment</source>
-        <target>Hozzászólás megjelenítése/elrejtése</target>
+        <target>Embann/diembann an evezhiadenn</target>
       </trans-unit>
       <trans-unit id="tl_comments.toggle.1">
         <source>Publish/unpublish comment ID %s</source>
-        <target>Az ID %s hozzászólás megjelenítése/elrejtése</target>
+        <target>Embann/diembann an evezhiadenn %s</target>
       </trans-unit>
     </body>
   </file>

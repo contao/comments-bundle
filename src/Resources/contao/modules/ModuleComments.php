@@ -1,17 +1,16 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of Contao.
  *
- * Copyright (c) 2005-2017 Leo Feyer
+ * (c) Leo Feyer
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace Contao;
 
 use Patchwork\Utf8;
-
 
 /**
  * Class ModuleComments
@@ -26,7 +25,7 @@ use Patchwork\Utf8;
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class ModuleComments extends \Module
+class ModuleComments extends Module
 {
 
 	/**
@@ -34,7 +33,6 @@ class ModuleComments extends \Module
 	 * @var string
 	 */
 	protected $strTemplate = 'mod_comments';
-
 
 	/**
 	 * Display a wildcard in the back end
@@ -45,9 +43,7 @@ class ModuleComments extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			/** @var BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
-
 			$objTemplate->wildcard = '### ' . Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['comments'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
@@ -59,7 +55,6 @@ class ModuleComments extends \Module
 
 		return parent::generate();
 	}
-
 
 	/**
 	 * Generate the module
@@ -83,3 +78,5 @@ class ModuleComments extends \Module
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_page', $objPage->id, $GLOBALS['TL_ADMIN_EMAIL']);
 	}
 }
+
+class_alias(ModuleComments::class, 'ModuleComments');
