@@ -146,6 +146,9 @@
       <trans-unit id="tl_comments.member.0">
         <source>Member</source>
       </trans-unit>
+      <trans-unit id="tl_comments.member.1">
+        <source>The associated member account if available.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

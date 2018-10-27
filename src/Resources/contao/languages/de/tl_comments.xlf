@@ -193,6 +193,10 @@
         <source>Member</source>
         <target>Mitglied</target>
       </trans-unit>
+      <trans-unit id="tl_comments.member.1">
+        <source>The associated member account if available.</source>
+        <target>Zugehöriges Mitgliedskonto sofern verfügbar.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
