@@ -1,57 +1,57 @@
 <?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en" target-language="de">
+  <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en" target-language="fr">
     <body>
       <trans-unit id="MSC.comments">
         <source>Comments</source>
-        <target>Kommentare</target>
+        <target>Commentaires</target>
       </trans-unit>
       <trans-unit id="MSC.com_name">
         <source>Name</source>
-        <target>Name</target>
+        <target>Nom</target>
       </trans-unit>
       <trans-unit id="MSC.com_email">
         <source>E-mail (not published)</source>
-        <target>E-Mail (wird nicht veröffentlicht)</target>
+        <target>E-mail (non publié)</target>
       </trans-unit>
       <trans-unit id="MSC.com_website">
         <source>Website</source>
-        <target>Webseite</target>
+        <target>Site internet</target>
       </trans-unit>
       <trans-unit id="MSC.com_comment">
         <source>Comment</source>
-        <target>Kommentar</target>
+        <target>Commentaire</target>
       </trans-unit>
       <trans-unit id="MSC.com_notify">
         <source>Notify me of new comments by e-mail (you can cancel your subscription at any time)</source>
-        <target>Über neue Kommentare per E-Mail benachrichtigen (Sie können das Abonnement jederzeit beenden)</target>
+        <target>M'avertir des nouveaux commentaires par e-mail (vous pouvez annuler votre abonnement à tout moment)</target>
       </trans-unit>
       <trans-unit id="MSC.com_submit">
         <source>Submit comment</source>
-        <target>Kommentar absenden</target>
+        <target>Envoyer le commentaire</target>
       </trans-unit>
       <trans-unit id="MSC.com_login">
         <source>You need to be logged in to add comments.</source>
-        <target>Sie müssen sich anmelden, um Kommentare hinzuzufügen.</target>
+        <target>Vous devez être connecté pour ajouter des commentaires.</target>
       </trans-unit>
       <trans-unit id="MSC.com_by">
         <source>Comment by</source>
-        <target>Kommentar von</target>
+        <target>Commentaire de</target>
       </trans-unit>
       <trans-unit id="MSC.com_reply">
         <source>Reply by</source>
-        <target>Antwort von</target>
+        <target>Réponse de</target>
       </trans-unit>
       <trans-unit id="MSC.com_quote">
         <source>%s wrote:</source>
-        <target>%s schrieb:</target>
+        <target>%s a écrit :</target>
       </trans-unit>
       <trans-unit id="MSC.com_code">
         <source>Code:</source>
-        <target>Code:</target>
+        <target>Code :</target>
       </trans-unit>
       <trans-unit id="MSC.com_subject">
         <source>New comment on %s</source>
-        <target>Neuer Kommentar auf %s</target>
+        <target>Nouveau commentaire sur %s</target>
       </trans-unit>
       <trans-unit id="MSC.com_message">
         <source>%s has created a new comment on your website:
@@ -70,42 +70,42 @@ Click here to edit or answer the comment:
 
 %s
 </source>
-        <target>%s hat einen neuen Kommentar auf Ihrer Webseite erstellt.
+        <target>%s a ajouter un nouveau commentaire sur votre site:
 
----
+        ---
 
-%s
+        %s
 
----
+        ---
 
-Klicken Sie hier, um den Kommentar aufzurufen:
+        Cliquez ici pour voir le commentaire:
 
-%s
+        %s
 
-Klicken Sie hier, um den Kommentar zu bearbeiten oder zu beantworten:
+        Cliquez ici pour modifier ou répondre au commentaire:
 
-%s
-</target>
+        %s
+    </target>
       </trans-unit>
       <trans-unit id="MSC.com_moderated">
         <source>This comment has to be published in the back end before it will appear on the website!</source>
-        <target>Der Kommentar muss im Backend veröffentlicht werden, bevor er auf der Webseite erscheint!</target>
+        <target>Ce commentaire doit être publié dans le back office avant qu'il puisse apparaître sur le site internet !</target>
       </trans-unit>
       <trans-unit id="MSC.com_confirm">
         <source>Your comment has been added and is now pending for approval.</source>
-        <target>Ihr Kommentar wurde hinzugefügt und wird nach redaktioneller Prüfung veröffentlicht.</target>
+        <target>Votre commentaire a été ajouté et est maintenant en attente d'approbation.</target>
       </trans-unit>
       <trans-unit id="MSC.com_optInConfirm">
         <source>Your subscription has been activated</source>
-        <target>Ihr Abonnement wurde aktiviert</target>
+        <target>Votre abonnement a été activé</target>
       </trans-unit>
       <trans-unit id="MSC.com_optInCancel">
         <source>Your subscription has been cancelled</source>
-        <target>Ihr Abonnement wurde storniert</target>
+        <target>Votre abonnement a été annulé</target>
       </trans-unit>
       <trans-unit id="MSC.com_optInSubject">
         <source>Your subscription on %s</source>
-        <target>Ihr Abonnement auf %s</target>
+        <target>Votre abonnement sur %s</target>
       </trans-unit>
       <trans-unit id="MSC.com_optInMessage">
         <source>Hello %s,
@@ -124,26 +124,26 @@ The confirmation link is valid for 24 hours. You can cancel your subscription at
 
 %s
 </source>
-        <target>Hallo %s,
+        <target>Bonjour %s,
 
-bitte bestätigen Sie, dass Sie über neue Kommentare auf der folgenden Webseite per E-Mail benachrichtigt werden möchten:
+              veuillez confirmer que vous souhaitez être informé des nouveaux commentaires par e-mail sur cette page:
 
-%s
+              %s
 
----
+              ---
 
-Klicken Sie hier, um Ihr Abonnement zu bestätigen:
+              Cliquez ici pour confirmer votre abonnement:
 
-%s
+              %s
 
-Der Bestätigungslink ist 24 Stunden gültig. Sie können Ihr Abonnement jederzeit beenden, indem Sie hier klicken:
+              Le lien de confirmation est valable 24 heures. Vous pouvez annuler votre abonnement à tout moment en cliquant ici:
 
-%s
-</target>
+              %s
+          </target>
       </trans-unit>
       <trans-unit id="MSC.com_notifySubject">
         <source>New comment on %s</source>
-        <target>Neuer Kommentar auf %s</target>
+        <target>Nouveau commentaire sur %s</target>
       </trans-unit>
       <trans-unit id="MSC.com_notifyMessage">
         <source>Hello %s,
@@ -160,24 +160,24 @@ Click here to cancel your subscription:
 
 %s
 </source>
-        <target>Hallo %s,
+        <target>Bonjour %s,
 
-auf einer Seite, die Sie abonniert haben, wurde ein neuer Kommentar hinzugefügt:
+              un nouveau commentaire a été ajouté sur une page à laquelle vous êtes abonné:
 
----
+              ---
 
-%s
+              %s
 
----
+              ---
 
-Klicken Sie hier, um Ihr Abonnement zu beenden:
+              Cliquez ici pour annuler votre abonnement:
 
-%s
-</target>
+              %s
+          </target>
       </trans-unit>
       <trans-unit id="MSC.com_notifyReplySubject">
         <source>New reply to a comment on %s</source>
-        <target>Neue Antwort auf einen Kommentar auf %s</target>
+        <target>Nouvelle réponse à un commentaire sur %s</target>
       </trans-unit>
       <trans-unit id="MSC.com_notifyReplyMessage">
         <source>Hello %s,
@@ -194,20 +194,20 @@ Click here to cancel your subscription:
 
 %s
 </source>
-        <target>Hallo %s,
+        <target>Bonjour %s,
 
-auf einer Seite, die Sie abonniert haben, wurde ein neuer Kommentar hinzugefügt:
+              une nouvelle réponse a été ajoutée sur une page à laquelle vous êtes abonné:
 
----
+              ---
 
-%s
+              %s
 
----
+              ---
 
-Klicken Sie hier, um Ihr Abonnement zu beenden:
+              Cliquez ici pour annuler votre abonnement:
 
-%s
-</target>
+              %s
+          </target>
       </trans-unit>
     </body>
   </file>
